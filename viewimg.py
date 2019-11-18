@@ -2,18 +2,19 @@ import cv2
 import numpy as np
 def nothing(x):
     pass
-img = cv2.imread("2.jpg")
+img = cv2.imread("test.jpg") #image read
 while True:
-    cv2.imshow("img", img)
-    color = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
+    img = cv2.resize(img, (500,500)) #window size
+    cv2.imshow("img", img) #show image
+    color = cv2.cvtColor(img, cv2.COLOR_RGB2HSV) #change type color
 
-    lower = np.array([50, 225, 220])
-    upper = np.array([255, 255, 255])
+    lower = np.array([110, 0, 100]) # ค่าของสีที่น้อยที่สุด
+    upper = np.array([255, 255, 255]) # ค่าของสีที่มากที่สุด
 
-    mask = cv2.inRange(color, lower, upper)
-    res = cv2.bitwise_and(img, img, mask=mask)
+    mask = cv2.inRange(color, lower, upper) #แสดงช่วงสีนั้น
+    res = cv2.bitwise_and(img, img, mask=mask) #แสดงช่วงสีนั้นแต่แสดงสีเดิม
     cv2.imshow("color", color)
     cv2.imshow("oh", res)
-    if cv2.waitKey(0):
+    if cv2.waitKey(0): #จะปิดเมื่อกดคียบอร์ด
         break
-    cv2.destroyAllWindows()
+    cv2.destroyAllWindows() #show all window
