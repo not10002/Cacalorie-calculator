@@ -5,7 +5,7 @@ from tkinter import filedialog
 def user():
     """User Interface program"""
     gui = Tk() #สร้างui
-    gui.configure(bg='paleturquoise')
+    gui.configure(bg='paleturquoise') #ตั้งสีเบื้องหลัง
     gui.geometry("900x900") #ขนาดเริ่มต้นโปรแกรม
     gui.title("Calorie_Calculator") #ชื่อที่แสดงบนหัวโปรแกรม
     label1 = Label(text="Calorie_Calculator", fg="#000").pack() #ข้อความแรกที่แสดง
