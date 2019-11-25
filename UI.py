@@ -1,4 +1,3 @@
-
 from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
@@ -16,7 +15,7 @@ def user():
     img = Label(gui, image=render) #Set เบื้องหลัง
     img.place(x=0, y=0) #แสดงพื้นหลัง
 
-    label1 = Label(text="Calorie_Calculator", fg="#000").pack() #ข้อความแรกที่แสดง
+    label1 = Label(text="Calorie_Calculator", fg="#000", font="Times").pack() #ข้อความแรกที่แสดง
     button1 = Button(text="submit", fg="red", command=output).pack() #ปุ่มแรกที่แสดง
     button2 = Button(text="first") #ปุ่มที่สองที่แสดง
     button2.bind('<Button-1>',box) #สั้งใช้งานbox function
@@ -25,7 +24,25 @@ def user():
     button3.bind('<Button-1>',wantfile) #สั้งใช้งานwant function
     button3.pack()
 
-    textbox = Entry().pack()
+    myframe=Frame(gui) # สร้างframeขึ้นมาใหม่
+    myframe.pack() #show frame
+    scrollbar = Scrollbar(myframe) #เพิ่ม Scrollbar 
+    scrollbar.pack(side=RIGHT) #แสดงScrollbarไว้ด้านขวา
+    listbox = Listbox(myframe, yscrollcommand=scrollbar.set, height=2) #เพิ่มlistbox 
+    listbox.insert(1, "ข้าวกระเพรา") #แทรกเข้าไปในlistbox
+    listbox.insert(2, "บะหมี่") #แทรกเข้าไปในlistbox
+    listbox.insert(3, "ข้าวผัด") #แทรกเข้าไปในlistbox
+    listbox.pack() #แสดงlistbox
+
+    textbox = Entry().pack() # เพิ่มและแสดง textbox
+
+    menubar = Menu(gui)
+    filemenu = Menu(menubar, tearoff=0)
+    filemenu.add_command(label="New")
+    filemenu.add_command(label="Open")
+    filemenu.add_command(label="Close")
+    menubar.add_cascade(label="File",menu=filemenu)
+    gui.config(menu=menubar)
     gui.mainloop() #คำสั่งให้ใช้งานจนกว่าจะออก
 
 def output():
