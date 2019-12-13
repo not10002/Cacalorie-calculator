@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
 from PIL import ImageTk,Image
+from viewimg import *
 
 def user():
     """User Interface program"""
@@ -18,12 +19,9 @@ def user():
 
     label1 = Label(text="Calorie_Calculator", fg="#000", font=("Courier", 24), bd=8, relief="solid").pack() #ข้อความแรกที่แสดง
     button1 = Button(text="submit", fg="red", command=output, font=("Courier", 15), bd=8, width=6, relief="raised").pack() #ปุ่มแรกที่แสดง
-    button2 = Button(text="first", font=("Courier", 15), bd=8, width=6, relief="raised") #ปุ่มที่สองที่แสดง
-    button2.bind('<Button-1>',box) #สั้งใช้งานbox function
+    button2 = Button(text="Select", font=("Courier", 15), bd=8, width=6, relief="raised") #ปุ่มที่สามที่แสดง
+    button2.bind('<Button-1>',wantfile) #สั้งใช้งานwant function
     button2.pack()
-    button3 = Button(text="Select", font=("Courier", 15), bd=8, width=6, relief="raised") #ปุ่มที่สามที่แสดง
-    button3.bind('<Button-1>',wantfile) #สั้งใช้งานwant function
-    button3.pack()
 
     myframe=Frame(gui) # สร้างframeขึ้นมาใหม่
     myframe.pack() #show frame
@@ -38,8 +36,6 @@ def user():
     radio2 = Radiobutton(text="ไก่", value=2).pack()
     radio3 = Radiobutton(text="กุ้ง", value=3).pack()
 
-    textbox = Entry().pack() # เพิ่มและแสดง textbox
-
     menubar = Menu(gui)
     filemenu = Menu(menubar, tearoff=0)
     filemenu.add_command(label="New") #เพิ่มคำสั่งNew
@@ -51,16 +47,10 @@ def user():
 
 def output():
     """output program"""
-    print("test") #แสดง output
-def box(event):
-    """box program"""
-    status = messagebox.askyesno(title="showcase", message="calorie calculator") #แสดงหน้าต่าง
-    if status == 0: #ถ้ากดno
-        print("กด No")
-    else: #ถ้ากดyes
-        print("กด Yes")
-def wantfile(event):
+    main() #แสดง output
+def wantfile(Event):
     """want program"""
-    myfile = filedialog.askopenfile() #เลือกไฟล์
-    label2 = Label(text=myfile).pack() #แสดงตำแหน่งไฟล์ที่เลือก
+    myfile = filedialog.askopenfilename() #เลือกไฟล์
+    myfile = str(myfile)
+    main() #แสดงตำแหน่งไฟล์ที่เลือก
 user()
