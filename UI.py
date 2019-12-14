@@ -5,52 +5,45 @@ from tkinter import filedialog
 from PIL import ImageTk,Image
 from viewimg import *
 
-def user():
-    """User Interface program"""
-    gui = Tk() #สร้างui
-    gui.geometry("450x550") #ขนาดเริ่มต้นโปรแกรม
-    gui.title("Calorie_Calculator") #ชื่อที่แสดงบนหัวโปรแกรม
-    gui.configure(bg='paleturquoise') #สีพื้นหลัง
-
-    load = Image.open("bg.png") #เปิดรูป
-    render = ImageTk.PhotoImage(load) #Set รูป
-    img = Label(gui, image=render) #Set เบื้องหลัง
-    img.place(x=0, y=0) #แสดงพื้นหลัง
-
-    label1 = Label(text="Calorie_Calculator", fg="#000", font=("Courier", 24), bd=8, relief="solid").pack() #ข้อความแรกที่แสดง
-    button1 = Button(text="submit", fg="red", command=output, font=("Courier", 15), bd=8, width=6, relief="raised").pack() #ปุ่มแรกที่แสดง
-    button2 = Button(text="Select", font=("Courier", 15), bd=8, width=6, relief="raised") #ปุ่มที่สามที่แสดง
-    button2.bind('<Button-1>',wantfile) #สั้งใช้งานwant function
-    button2.pack()
-
-    myframe=Frame(gui) # สร้างframeขึ้นมาใหม่
-    myframe.pack() #show frame
-    scrollbar = Scrollbar(myframe) #เพิ่ม Scrollbar 
-    scrollbar.pack(side=RIGHT) #แสดงScrollbarไว้ด้านขวา
-    listbox = Listbox(myframe, yscrollcommand=scrollbar.set, height=2) #เพิ่มlistbox 
-    listbox.insert(1, "ข้าวกระเพรา") #แทรกเข้าไปในlistbox
-    listbox.insert(2, "บะหมี่") #แทรกเข้าไปในlistbox
-    listbox.insert(3, "ข้าวผัด") #แทรกเข้าไปในlistbox
-    listbox.pack() #แสดงlistbox
-    radio1 = Radiobutton(text="หมู", value=1).pack()
-    radio2 = Radiobutton(text="ไก่", value=2).pack()
-    radio3 = Radiobutton(text="กุ้ง", value=3).pack()
-
-    menubar = Menu(gui)
-    filemenu = Menu(menubar, tearoff=0)
-    filemenu.add_command(label="New") #เพิ่มคำสั่งNew
-    filemenu.add_command(label="Open") #เพิ่มคำสั่งOpen
-    filemenu.add_command(label="Close") #เพิ่มคำสั่งClose
-    menubar.add_cascade(label="File",menu=filemenu) #เพิ่ม menu ชื่อ File
-    gui.config(menu=menubar)
-    gui.mainloop() #คำสั่งให้ใช้งานจนกว่าจะออก
-
 def output():
     """output program"""
-    main() #แสดง output
-def wantfile(Event):
-    """want program"""
-    myfile = filedialog.askopenfilename() #เลือกไฟล์
-    myfile = str(myfile)
-    main() #แสดงตำแหน่งไฟล์ที่เลือก
-user()
+    check = var.get()
+    if check == 1 :
+        myfile = filedialog.askopenfilename() #เลือกไฟล์
+        myfile = str(myfile) #แสดงตำแหน่งไฟล์ที่เลือก
+        test1(myfile)
+    else:
+        myfile = filedialog.askopenfilename() #เลือกไฟล์
+        myfile = str(myfile) #แสดงตำแหน่งไฟล์ที่เลือก
+        test2(myfile)
+
+gui = Tk() #สร้างui
+gui.geometry("800x400") #ขนาดเริ่มต้นโปรแกรม
+gui.title("Calorie_Calculator") #ชื่อที่แสดงบนหัวโปรแกรม
+gui.configure(bg='paleturquoise') #สีพื้นหลัง
+
+load = Image.open("BG.png") #เปิดรูป
+render = ImageTk.PhotoImage(load) #Set รูป
+img = Label(gui, image=render) #Set เบื้องหลัง
+img.place(width=800, height=400) #แสดงพื้นหลัง
+
+label1 = Label(text=" Calorie_Calculator ", fg="#000", font=("Courier", 20, "bold"), pady=30, bd=8, relief="solid").pack() #ข้อความแรกที่แสดง
+
+myframe=Frame(gui) # สร้างframeขึ้นมาใหม่
+myframe.pack() #show frame
+scrollbar = Scrollbar(myframe) #เพิ่ม Scrollbar 
+scrollbar.pack(side=RIGHT) #แสดงScrollbarไว้ด้านขวา
+listbox = Listbox(myframe, yscrollcommand=scrollbar.set, height=5, font=("Courier", 14)) #เพิ่มlistbox 
+listbox.insert(1, "หมู") #แทรกเข้าไปในlistbox
+listbox.insert(2, "ไก่") #แทรกเข้าไปในlistbox
+listbox.insert(3, "กุ้ง") #แทรกเข้าไปในlistbox
+listbox.pack() #แสดงlistbox
+var = IntVar()
+var.set(0)
+radio1 = Radiobutton(text="ข้าวกะเพรา", padx=20, variable=var, value=1, font=("Courier", 14)).pack()
+radio2 = Radiobutton(text="ข้าวผัดพริกแกง", padx=13, variable=var, value=2, font=("Courier", 14)).pack()
+radio3 = Radiobutton(text="ข้าวผัด", padx=30, variable=var, value=3, font=("Courier", 14)).pack()
+
+button = Button(text="submit", fg="red", command=output, font=("Courier", 15), bd=8, width=6, relief="raised").pack() #ปุ่มแรกที่แสดง
+
+gui.mainloop()
